@@ -10,6 +10,9 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { SQLitePorter } from '@ionic-native/sqlite-porter';
+import { TimetableProvider } from '../providers/timetable/timetable';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +37,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    SQLitePorter,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    TimetableProvider
   ]
 })
 export class AppModule {}
