@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+//import { Http } from '@angular/http';
+import {Http, Response} from '@angular/http';
+
 import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the TimetableProvider provider.
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
 @Injectable()
 export class TimetableProvider {
 
-  constructor(public http: Http) {
-    console.log('Hello TimetableProvider Provider');
-  }
+onCampus: Date[];
+
+  constructor(private http: Http) {
+    console.log('Enter TimetableProvider Provider');
+
+}
+
+getData() {
+  return this.http.get("../../assets/timetable.json")
+      .map((res:Response) => res.json().timetable);
+}
 
 }

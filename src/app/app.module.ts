@@ -10,8 +10,9 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { SQLitePorter } from '@ionic-native/sqlite-porter';
 import { TimetableProvider } from '../providers/timetable/timetable';
+import { HttpModule }    from '@angular/http';
+
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { TimetableProvider } from '../providers/timetable/timetable';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -37,9 +39,9 @@ import { TimetableProvider } from '../providers/timetable/timetable';
   providers: [
     StatusBar,
     SplashScreen,
-    SQLitePorter,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    TimetableProvider
+    TimetableProvider,
+
   ]
 })
 export class AppModule {}
