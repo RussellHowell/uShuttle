@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { TimetableProvider } from '../../providers/timetable/timetable';
+import { NavController, NavParams } from 'ionic-angular';
+
 
 @Component({
   selector: 'page-about',
@@ -8,17 +8,60 @@ import { TimetableProvider } from '../../providers/timetable/timetable';
 })
 export class AboutPage {
 
+
+
   timetableData: any [];
+  timetableDates: any[];
+  currentDate: Date;
+  tripType: any;
 
-  constructor(public navCtrl: NavController, private timetable: TimetableProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    // this.timetableDates = [];
+    // this.timetable.getData().subscribe((data) => {
+    //   this.timetableData = data;
+    //     this.tripType = navParams.data.tripType;
+    //   this.populateTimetable();
 
-    this.timetable.getData().subscribe((data) => {
-      console.log(data["on_campus_weekday"]["connelly"]);
-      this.timetableData = data;
-
-
-    });
+  //  });
 
   }
+
+  // populateTimetable(){
+  //
+  //   for (const key of Object.keys(this.timetableData["on_campus_weekday"])) {
+  //       //console.log(key, this.timetableData["on_campus_weekday"][key]);
+  //
+  //       //this.timetableDates.push(key);
+  //
+  //       let datetimes = [];
+  //       let earlytimes = [];
+  //       let morningIndex = 0;
+  //
+  //       this.timetableData["on_campus_weekday"][key].forEach((time) => {
+  //
+  //         let x = moment(time, 'HH:mm');
+  //
+  //         if (x < moment('01:30', 'HH:mm'))
+  //       {
+  //         datetimes.splice(morningIndex, 0, moment(x, 'HH:mm'));
+  //         morningIndex++;
+  //         datetimes.push(moment(x,'HH:mm').add(1,'days'));
+  //       }
+  //       else
+  //       {
+  //         datetimes.push(moment(x,'HH:mm'));
+  //       }
+  //
+  //
+  //
+  //       });
+  //
+  //       this.timetableDates[key] = datetimes;
+  //
+  //   }
+  //
+  //     console.log(this.timetableDates);
+  //
+  // }
 
 }

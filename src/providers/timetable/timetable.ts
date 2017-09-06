@@ -10,11 +10,21 @@ import 'rxjs/add/operator/map';
 export class TimetableProvider {
 
 timetable: any[];
+dataReady: boolean;
+callbacks: any[];
 
   constructor(private http: Http) {
     console.log('Enter TimetableProvider');
     this.timetable = [];
+    this.callbacks = [];
+    this.dataReady = false;
     this.loadTimetable();
+}
+
+
+//return location names for passed tripType back to requesting page
+getLocations(tripType){
+  return Object.keys(this.timetable[tripType]);
 }
 
 //retrieve the next 4 times for location from the timetable data
@@ -34,6 +44,17 @@ getNextTimes(type, location, time){
 
   return result;
 }
+
+getNextTime(type, location){
+  let times = this.timetable[type][location];
+  let now = moment();
+  for(let i = 0; i<times.length; i++){
+    if(times[i].isSameOrAfter(now)){
+      return times[i];
+    }
+  }
+}
+
 
 
 //load timetable from JSON sourcefile and build time objects based on triptype and location
@@ -69,9 +90,10 @@ loadTimetable(){
             this.timetable[key0][key1] = tmp;
           }
         }
+        this.dataReady = true;
 
       });
-    }
 
+    }
 
 }
