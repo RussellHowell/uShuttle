@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-//import { Http } from '@angular/http';
 import {Http, Response} from '@angular/http';
 import  moment  from 'moment';
 
@@ -16,6 +15,24 @@ timetable: any[];
     console.log('Enter TimetableProvider');
     this.timetable = [];
     this.loadTimetable();
+}
+
+//retrieve the next 4 times for location from the timetable data
+getNextTimes(type, location, time){
+  let times = this.timetable[type][location];
+  let queryTime = moment(time, 'HH:mm');
+  let result = [];
+  for(let i = 0; i<times.length; i++){
+    if(times[i].isSameOrAfter(queryTime)){
+      console.log(times[i]);
+      for(let j = i; j < i+4; j++){
+        result.push(times[j]);
+      }
+      i = times.length;
+    }
+  }
+
+  return result;
 }
 
 
@@ -52,9 +69,9 @@ loadTimetable(){
             this.timetable[key0][key1] = tmp;
           }
         }
-      });
 
-}
+      });
+    }
 
 
 }
