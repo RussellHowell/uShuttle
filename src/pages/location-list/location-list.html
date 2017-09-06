@@ -9,7 +9,7 @@
 
 
 <ion-content class="card-background-page" padding>
-  <ion-card *ngFor="let location of locations" [navPush]="homePage"[navParams]="location">
+  <ion-card *ngFor="let location of locations" [navPush]="detailPage"[navParams]="{loc: location, trip: tripType}">
 
     <img src="https://www1.villanova.edu/content/villanova/fmo/maintenance/grounds/_jcr_content/pagecontent/image.img.jpg/1455736674234.jpg"/>
     <ion-card-header class="card-title" >

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TimetableProvider } from '../../providers/timetable/timetable';
+import { LocationDetailPage } from '../location-detail/location-detail';
 import { HomePage } from '../home/home';
-
 
 @IonicPage()
 @Component({
@@ -14,19 +14,16 @@ export class LocationListPage {
   tripType: string;
   timetableProv: TimetableProvider;
   locations: string[];
-  homePage = HomePage;
+  detailPage = LocationDetailPage;
 
   constructor(public navCtrl: NavController, private timetableProvider: TimetableProvider, public navParams: NavParams) {
     this.timetableProv = timetableProvider;
     this.tripType = navParams.data.tripType;
-
-
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LocationListPage');
     this.getTimetableLocs();
-
   }
 
   getTimetableLocs(){
@@ -38,6 +35,5 @@ export class LocationListPage {
   getNextTime(location){
     return this.timetableProvider.getNextTime(this.tripType, location).format("hh:mm a");
   }
-
 
 }

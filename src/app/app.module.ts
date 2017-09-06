@@ -8,6 +8,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LocationListPage } from '../pages/location-list/location-list';
+import { LocationDetailPage } from '../pages/location-detail/location-detail';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -24,7 +25,8 @@ import  moment  from 'moment';
     ContactPage,
     HomePage,
     TabsPage,
-    LocationListPage
+    LocationListPage,
+    LocationDetailPage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,8 @@ import  moment  from 'moment';
     ContactPage,
     HomePage,
     TabsPage,
-    LocationListPage
+    LocationListPage,
+    LocationDetailPage
   ],
   providers: [
     StatusBar,
