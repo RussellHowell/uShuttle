@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TimetableProvider } from '../../providers/timetable/timetable';
+import { HomePage } from '../home/home';
 
 
 @IonicPage()
@@ -13,6 +14,7 @@ export class LocationPage {
   tripType: string;
   timetableProv: TimetableProvider;
   locations: string[];
+  homePage = HomePage;
 
   constructor(public navCtrl: NavController, private timetableProvider: TimetableProvider, public navParams: NavParams) {
     this.timetableProv = timetableProvider;
@@ -36,5 +38,6 @@ export class LocationPage {
   getNextTime(location){
     return this.timetableProvider.getNextTime(this.tripType, location).format("hh:mm a");
   }
+
 
 }
