@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { TimetableProvider } from '../../providers/timetable/timetable'
 
 @Component({
@@ -8,8 +8,9 @@ import { TimetableProvider } from '../../providers/timetable/timetable'
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, private timetable: TimetableProvider) {
+  constructor(public navCtrl: NavController, private timetable: TimetableProvider, public navParams: NavParams) {
     console.log("enter HomePage")
+    console.log(navParams.data);
   }
 
 }

@@ -6,10 +6,10 @@ import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
-  selector: 'page-location',
-  templateUrl: 'location.html',
+  selector: 'page-location-list',
+  templateUrl: 'location-list.html',
 })
-export class LocationPage {
+export class LocationListPage {
 
   tripType: string;
   timetableProv: TimetableProvider;
@@ -24,7 +24,7 @@ export class LocationPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LocationPage');
+    console.log('ionViewDidLoad LocationListPage');
     this.getTimetableLocs();
 
   }

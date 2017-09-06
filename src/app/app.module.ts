@@ -7,7 +7,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import { LocationPage } from '../pages/location/location';
+import { LocationListPage } from '../pages/location-list/location-list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -24,7 +24,7 @@ import  moment  from 'moment';
     ContactPage,
     HomePage,
     TabsPage,
-    LocationPage
+    LocationListPage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +38,7 @@ import  moment  from 'moment';
     ContactPage,
     HomePage,
     TabsPage,
-    LocationPage
+    LocationListPage
   ],
   providers: [
     StatusBar,
