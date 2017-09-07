@@ -11,25 +11,25 @@
 <ion-content padding>
   <ion-item>
     <ion-label>Where are you?</ion-label>
-    <ion-select [(ngModel)]="from">
+    <ion-select [(ngModel)]="from" interface="action-sheet">
       <ion-option *ngFor="let location of locationList" [value]="location">{{location}}</ion-option>
     </ion-select>
   </ion-item>
 
   <ion-item>
     <ion-label>Where are you going?</ion-label> <!-- TODO - Filter out item selectred above -->
-    <ion-select [(ngModel)]="to">
+    <ion-select [(ngModel)]="to" interface="action-sheet">
       <ion-option *ngFor="let location of locationList" [value]="location">{{location}}</ion-option>
     </ion-select>
   </ion-item>
 
   <ion-list [(ngModel)]="locationMod" radio-group>
    <ion-item>
-     <ion-label color="dark">Leave At</ion-label>
+     <ion-label color="dark">Leave At </ion-label>
      <ion-radio value="leave" checked ></ion-radio>
    </ion-item>
    <ion-item>
-     <ion-label color="dark">Arrive By</ion-label>
+     <ion-label color="dark">Arrive By </ion-label>
      <ion-radio value="arrive"></ion-radio>
    </ion-item>
  </ion-list>
@@ -39,6 +39,9 @@
   <ion-datetime displayFormat="hh:mm a" [(ngModel)]="time"></ion-datetime>
 </ion-item>
 <br/>
-<button ion-button full>Find Times</button>
+<button ion-button full (click)="findTrip()">Find Times</button>
+<p> Leaving {{ from }} at {{ originTime }}</p> <br/>
+<p> Arriving at {{ to }} at {{ destinationTime }}</p> <br/>
+
 
 </ion-content>

@@ -24,6 +24,9 @@ export class LocationDetailPage {
   locationMod: String;
   time: Object;
 
+  originTime: String;
+  destinationTime: String;
+
   constructor(public navCtrl: NavController, private timetable: TimetableProvider, public navParams: NavParams) {
    this.tripType = navParams.data.trip;
    this.locationList = timetable.getLocations(this.tripType);
@@ -31,10 +34,20 @@ export class LocationDetailPage {
    this.to = this.locationList[0];
    this.locationMod = "leave";
    this.time = moment().format();
+
+   //console.log(this.timetable.findTrip(this.tripType, this.locationList[0], this.locationList[5], this.locationMod, moment()));
 }
+
+  findTrip(){
+    let result = this.timetable.findTrip(this.tripType, this.from, this.to, this.locationMod, this.time);
+    this.originTime = moment(result.origin).format("hh:mm a");
+    this.destinationTime = moment(result.destination).format("hh:mm a");
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LocationDetailPage');
   }
+
+
 
 }

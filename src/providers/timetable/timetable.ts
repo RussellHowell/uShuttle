@@ -55,6 +55,47 @@ getNextTime(type, location){
   }
 }
 
+findTrip(tripType, origin, destination, findType, time){
+  let originTimes = this.timetable[tripType][origin];
+  let destinationTimes = this.timetable[tripType][destination];
+  let result = {origin: Object, destination: Object};
+
+  if(findType === "leave"){
+
+      for(let i = 0; i<originTimes.length; i++){
+        if(originTimes[i].isSameOrAfter(time)){
+          result.origin = originTimes[i];
+          for(let j=0; j<destinationTimes.length; j++){
+            if(destinationTimes[j].isSameOrAfter(result.origin)){
+              result.destination = destinationTimes[j];
+              i = originTimes.length;
+              j = destinationTimes.length;
+            }
+          }
+        }
+      }
+
+  }else if(findType === "arrive"){
+    for(let i = destinationTimes.length-1; i >= 0; i--){
+          if(destinationTimes[i].isSameOrBefore(time)){
+            result.destination = destinationTimes[i];
+            for(let j = originTimes.length-1; j>=0; j--){
+              if(originTimes[i].isSameOrBefore(result.destination)){
+                result.origin = originTimes[i];
+                i = 0;
+                j = 0;
+              }
+            }
+          }
+    }
+  }else{
+    console.error("Invalid Trip Modifier");
+  }
+
+  return result;
+
+}
+
 
 
 //load timetable from JSON sourcefile and build time objects based on triptype and location
@@ -95,5 +136,7 @@ loadTimetable(){
       });
 
     }
+
+
 
 }
