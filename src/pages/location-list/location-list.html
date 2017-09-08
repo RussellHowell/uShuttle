@@ -9,17 +9,19 @@
 
 
 <ion-content class="card-background-page" padding>
-  <ion-card *ngFor="let location of locations" [navPush]="detailPage"[navParams]="{loc: location, trip: tripType}">
+  <ion-grid fixed>
+    <ion-row>
+      <ion-card class="overlay" *ngFor="let location of locations" [navPush]="detailPage"[navParams]="{loc: location, trip: tripType}" col-lg-5>
+      <img [src]="imgString(location)"/>
+      <ion-card-header class="card-title" >
+        {{ location }}
+      </ion-card-header>
 
-    <img src="https://www1.villanova.edu/content/villanova/fmo/maintenance/grounds/_jcr_content/pagecontent/image.img.jpg/1455736674234.jpg"/>
-    <ion-card-header class="card-title" >
-      {{ location }}
-    </ion-card-header>
-
-    <ion-card-header class="card-subtitle">
-      Next Shuttle at {{ getNextTime(location) }}
-    </ion-card-header>
-
+      <ion-card-header class="card-subtitle">
+        Next Shuttle at {{ getNextTime(location) }}
+      </ion-card-header>
   </ion-card>
+</ion-row>
+</ion-grid>
 
 </ion-content>

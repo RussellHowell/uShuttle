@@ -76,10 +76,10 @@ findTrip(tripType, origin, destination, findType, time){
       }
 
   }else if(findType === "arrive"){
-    for(let i = destinationTimes.length-1; i >= 0; i--){
+    for(let i = destinationTimes.length-1; i > -1; i--){
           if(destinationTimes[i].isSameOrBefore(time)){
             result.destination = destinationTimes[i];
-            for(let j = originTimes.length-1; j>=0; j--){
+            for(let j = originTimes.length-1; j>-1; j--){
               if(originTimes[i].isSameOrBefore(result.destination)){
                 result.origin = originTimes[i];
                 i = 0;

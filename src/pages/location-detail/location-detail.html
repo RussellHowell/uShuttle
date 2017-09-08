@@ -9,6 +9,11 @@
 
 
 <ion-content padding>
+
+<div class="image-box">
+  <ion-img class="origin-image" [src]="imgString(from)"></ion-img>
+  <ion-img class="destination-image" [src]="imgString(to)"></ion-img>
+</div>
   <ion-item>
     <ion-label>Where are you?</ion-label>
     <ion-select [(ngModel)]="from" interface="action-sheet">
@@ -23,7 +28,8 @@
     </ion-select>
   </ion-item>
 
-  <ion-list [(ngModel)]="locationMod" radio-group>
+  <!-- TODO - Fix 'leavingAt' bug -->
+  <!-- <ion-list [(ngModel)]="locationMod" radio-group>
    <ion-item>
      <ion-label color="dark">Leave At </ion-label>
      <ion-radio value="leave" checked ></ion-radio>
@@ -32,10 +38,10 @@
      <ion-label color="dark">Arrive By </ion-label>
      <ion-radio value="arrive"></ion-radio>
    </ion-item>
- </ion-list>
+ </ion-list> -->
 
  <ion-item>
-  <ion-label>When?</ion-label>
+  <ion-label>When are you leaving?</ion-label>
   <ion-datetime displayFormat="hh:mm a" [(ngModel)]="time"></ion-datetime>
 </ion-item>
 <br/>

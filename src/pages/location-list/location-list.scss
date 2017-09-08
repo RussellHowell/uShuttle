@@ -1,13 +1,36 @@
 page-location-list {
 
+
+
   .card-background-page {
 
     ion-card {
       position: relative;
       text-align: center;
-      height: 200px;
+      height: 225px;
+      padding: 0px;
+      background-size: cover;
+      object-fit: cover;
 
+      img{
+        height: 100%;
+        object-fit: cover;
+      }
+
+
+
+      &:before {
+          content: '';
+              position: absolute;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+              background-image: linear-gradient(to bottom right,#000,#000);
+              opacity: .30;
+        }
     }
+
 
 
     .card-title {
@@ -16,7 +39,8 @@ page-location-list {
       font-size: 2.0em;
       width: 100%;
       font-weight: bold;
-      color: #000;
+      color: #fff;
+      color: white;
     }
 
     .card-subtitle {
@@ -24,7 +48,7 @@ page-location-list {
       position: absolute;
       top: 52%;
       width: 100%;
-      color: #000;
+      color: #fff;
     }
 
   }

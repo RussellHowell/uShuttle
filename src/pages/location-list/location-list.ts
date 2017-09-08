@@ -36,4 +36,9 @@ export class LocationListPage {
     return this.timetableProvider.getNextTime(this.tripType, location).format("hh:mm a");
   }
 
+  imgString(loc){
+    return "assets/img/" + loc + ".jpg";
+  }
+
+
 }
