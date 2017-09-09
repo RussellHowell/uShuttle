@@ -32,22 +32,25 @@ export class LocationDetailPage {
 }
 
   findTrips(){
-    this.resultTimes = [];
-    let result = this.timetable.findTrips(this.tripType, this.from, this.to, this.locationMod, this.time);
-    for(let i = 0; i<result.origin.length; i++){
-      let obj = {"departure": moment(result.origin[i]).format("h:mm a"), "arrival": moment(result.destination[i]).format("h:mm a")};
-      this.resultTimes.push(obj);
-    }
-  }
+     this.resultTimes = this.timetable.findTrips(this.tripType, this.from, this.to, this.locationMod, this.time);
+   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LocationDetailPage');
   }
 
+
+/*        DOM Helpers       */
 //convert a location to an url for its corresponding image asset
   imgString(loc){
     return "assets/img/" + loc + ".jpg";
   }
+
+  formatTime(time){
+    return time.format('h:mm a');
+  }
+
+
 
 
 

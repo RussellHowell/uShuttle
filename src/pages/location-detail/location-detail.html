@@ -56,8 +56,8 @@
     <ion-grid>
       <ion-row>
         <div col-2>    <img src="assets/img/trip_hint.jpeg"/> </div>
-        <div col-10><p class="top"> {{from}} <b>{{ result.departure}}</b></p>
-        <p> {{to}} <b>{{ result.arrival }}</b></p></div>
+        <div col-10><p class="top"> {{from}} <b>{{ formatTime(result.departure)}}</b></p>
+        <p> {{to}} <b>{{ formatTime(result.arrival) }}</b></p></div>
   </ion-row>
     </ion-grid>
       </ion-card-content>
