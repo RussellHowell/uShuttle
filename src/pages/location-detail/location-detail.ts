@@ -17,8 +17,9 @@ export class LocationDetailPage {
   locationMod: String;
   time: Object;
 
-  originTime: String;
-  destinationTime: String;
+  resultTimes: Object[];
+  originTimes: any[];
+  destinationTimes: any[];
 
   constructor(public navCtrl: NavController, private timetable: TimetableProvider, public navParams: NavParams) {
    this.tripType = navParams.data.trip;
@@ -27,19 +28,23 @@ export class LocationDetailPage {
    this.to = this.locationList[0];
    this.locationMod = "leave";
    this.time = moment().format();
-
+   this.resultTimes = [];
 }
 
-  findTrip(){
-    let result = this.timetable.findTrip(this.tripType, this.from, this.to, this.locationMod, this.time);
-    this.originTime = moment(result.origin).format("hh:mm a");
-    this.destinationTime = moment(result.destination).format("hh:mm a");
+  findTrips(){
+    this.resultTimes = [];
+    let result = this.timetable.findTrips(this.tripType, this.from, this.to, this.locationMod, this.time);
+    for(let i = 0; i<result.origin.length; i++){
+      let obj = {"departure": moment(result.origin[i]).format("h:mm a"), "arrival": moment(result.destination[i]).format("h:mm a")};
+      this.resultTimes.push(obj);
+    }
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LocationDetailPage');
   }
 
+//convert a location to an url for its corresponding image asset
   imgString(loc){
     return "assets/img/" + loc + ".jpg";
   }

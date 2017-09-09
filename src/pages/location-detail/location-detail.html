@@ -7,7 +7,6 @@
 
 </ion-header>
 
-
 <ion-content padding>
 
 <div class="image-box">
@@ -45,9 +44,25 @@
   <ion-datetime displayFormat="hh:mm a" [(ngModel)]="time"></ion-datetime>
 </ion-item>
 <br/>
-<button ion-button full (click)="findTrip()">Find Times</button>
-<p> Leaving {{ from }} at {{ originTime }}</p> <br/>
-<p> Arriving at {{ to }} at {{ destinationTime }}</p> <br/>
+<button ion-button full (click)="findTrips()">Find Times</button>
+<ion-grid>
+<ion-row>
+<ion-card  *ngFor="let result of resultTimes let i = index" [attr.data-index]="i">
 
+  <ion-card-header>
+  <ion-icon name="bus"></ion-icon> &nbsp;  <b>Option {{i+1}}</b>
+  </ion-card-header>
 
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <div col-2>    <img src="assets/img/trip_hint.jpeg"/> </div>
+        <div col-10><p class="top"> {{from}} <b>{{ result.departure}}</b></p>
+        <p> {{to}} <b>{{ result.arrival }}</b></p></div>
+  </ion-row>
+    </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ion-row>
+</ion-grid>
 </ion-content>

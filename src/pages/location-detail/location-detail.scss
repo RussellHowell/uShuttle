@@ -1,6 +1,6 @@
 page-location-detail {
 
-ion-img{
+.image-box ion-img{
   position: absolute;
   top:0; left:0;
   object-fit: cover;
@@ -21,8 +21,15 @@ clip-path: polygon(66% 0, 100% 0, 100% 100%, 33% 100%);
 
 .image-box{
   width: 100%;
-  height: 300px;
+  height: 225px;
   position:relative;
 }
+
+ion-card img{
+  height: 50px;
+  width: auto;
+}
+
+
 
 }

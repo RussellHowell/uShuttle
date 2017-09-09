@@ -21,7 +21,6 @@ callbacks: any[];
     this.loadTimetable();
 }
 
-
 //return location names for passed tripType back to requesting page
 getLocations(tripType){
   return Object.keys(this.timetable[tripType]);
@@ -41,7 +40,6 @@ getNextTimes(type, location, time){
       i = times.length;
     }
   }
-
   return result;
 }
 
@@ -55,27 +53,38 @@ getNextTime(type, location){
   }
 }
 
-findTrip(tripType, origin, destination, findType, time){
+
+findTrips(tripType, origin, destination, findType, time){
   let originTimes = this.timetable[tripType][origin];
   let destinationTimes = this.timetable[tripType][destination];
-  let result = {origin: Object, destination: Object};
+  let result = {origin: [], destination: []};
 
+//if the trip modifier is "leaveAt"
   if(findType === "leave"){
-
+    //iterate through schedule for origin location looking
+    //for time that is >= requested time
       for(let i = 0; i<originTimes.length; i++){
         if(originTimes[i].isSameOrAfter(time)){
-          result.origin = originTimes[i];
+          result.origin[0] = originTimes[i];
+          //get the next 3 departure times
+          for(let f = i+1; (f<originTimes.length) && (f<i+4); f++){
+            result.origin.push(originTimes[f]);
+          }
+          //find corresponding arrival times
           for(let j=0; j<destinationTimes.length; j++){
-            if(destinationTimes[j].isSameOrAfter(result.origin)){
-              result.destination = destinationTimes[j];
+            if(destinationTimes[j].isSameOrAfter(result.origin[0])){
+              result.destination[0] = destinationTimes[j];
+              for(let f = j+1; (f<destinationTimes.length) && (f<j+4); f++){
+                result.destination.push(destinationTimes[f]);
+              }
+              //break out of loop
               i = originTimes.length;
               j = destinationTimes.length;
             }
           }
         }
       }
-
-  }else if(findType === "arrive"){
+  }else if(findType === "arrive"){ //TODO -- FIX
     for(let i = destinationTimes.length-1; i > -1; i--){
           if(destinationTimes[i].isSameOrBefore(time)){
             result.destination = destinationTimes[i];
@@ -87,16 +96,12 @@ findTrip(tripType, origin, destination, findType, time){
               }
             }
           }
-    }
+        }
   }else{
     console.error("Invalid Trip Modifier");
   }
-
   return result;
-
 }
-
-
 
 //load timetable from JSON sourcefile and build time objects based on triptype and location
 loadTimetable(){
