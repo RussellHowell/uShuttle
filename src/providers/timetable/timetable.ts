@@ -59,23 +59,32 @@ findTrips(tripType, origin, destination, findType, time){
   let destinationTimes = this.timetable[tripType][destination];
   let result = {origin: [], destination: []};
 
+
 //if the trip modifier is "leaveAt"
   if(findType === "leave"){
     //iterate through schedule for origin location looking
     //for time that is >= requested time
       for(let i = 0; i<originTimes.length; i++){
         if(originTimes[i].isSameOrAfter(time)){
-          result.origin[0] = originTimes[i];
-          //get the next 3 departure times
-          for(let f = i+1; (f<originTimes.length) && (f<i+4); f++){
+          //get the next 4 departure times
+          for(let f = i; (f<originTimes.length) && (f<i+4); f++){
             result.origin.push(originTimes[f]);
           }
           //find corresponding arrival times
           for(let j=0; j<destinationTimes.length; j++){
             if(destinationTimes[j].isSameOrAfter(result.origin[0])){
-              result.destination[0] = destinationTimes[j];
-              for(let f = j+1; (f<destinationTimes.length) && (f<j+4); f++){
+              //get next 4 arrival times and
+              //compensate for the fact that some locations are visited
+              //twice before reaching destination
+              //TODO - refactor algorithm
+              let c = 0;
+              for(let f = j; (f<destinationTimes.length) && (f<j+4); f++){
                 result.destination.push(destinationTimes[f]);
+                if(destinationTimes[f].isSameOrAfter(result.origin[c])){
+                    result.destination.push(destinationTimes[f]);
+                    c++;
+                  }
+                  c++;
               }
               //break out of loop
               i = originTimes.length;
@@ -84,15 +93,29 @@ findTrips(tripType, origin, destination, findType, time){
           }
         }
       }
-  }else if(findType === "arrive"){ //TODO -- FIX
+  }else if(findType === "arrive"){
+    //iterate through arrival times from the end of the array
+    //looking for time that is less than or equal to supplied time
     for(let i = destinationTimes.length-1; i > -1; i--){
           if(destinationTimes[i].isSameOrBefore(time)){
-            result.destination = destinationTimes[i];
+            for(let f = i; (f>-1) && (f>i-6); f--){
+              result.destination.push(destinationTimes[f]);
+            }
+            //find corresponding departure times
             for(let j = originTimes.length-1; j>-1; j--){
-              if(originTimes[i].isSameOrBefore(result.destination)){
-                result.origin = originTimes[i];
-                i = 0;
-                j = 0;
+              if(originTimes[j].isSameOrBefore(result.destination[0])){
+                //keep track of array index - each location does not have the same amount of visits
+                //therefore the arrive by timetable
+                let c = 0;
+                for(let f = j; (f>-1) && (f>j-6); f--){
+                  if(originTimes[f].isSameOrBefore(result.destination[c])){
+                    result.origin.push(originTimes[f]);
+                    c++;
+                  }
+                }
+                //break out of loop
+                i = -1;
+                j = -1;
               }
             }
           }

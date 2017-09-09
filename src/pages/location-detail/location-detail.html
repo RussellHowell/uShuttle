@@ -27,8 +27,7 @@
     </ion-select>
   </ion-item>
 
-  <!-- TODO - Fix 'leavingAt' bug -->
-  <!-- <ion-list [(ngModel)]="locationMod" radio-group>
+  <ion-list [(ngModel)]="locationMod" radio-group>
    <ion-item>
      <ion-label color="dark">Leave At </ion-label>
      <ion-radio value="leave" checked ></ion-radio>
@@ -37,10 +36,10 @@
      <ion-label color="dark">Arrive By </ion-label>
      <ion-radio value="arrive"></ion-radio>
    </ion-item>
- </ion-list> -->
+ </ion-list>
 
  <ion-item>
-  <ion-label>When are you leaving?</ion-label>
+  <ion-label>What time?</ion-label>
   <ion-datetime displayFormat="hh:mm a" [(ngModel)]="time"></ion-datetime>
 </ion-item>
 <br/>
