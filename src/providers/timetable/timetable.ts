@@ -20,7 +20,7 @@ callbacks: any[];
     this.timetable = [];
     this.callbacks = [];
     this.dataReady = false;
-    this.loadTimetable();
+    //this.loadTimetable();
   }
 
 //return location names for passed tripType back to requesting page
@@ -180,6 +180,9 @@ findTrips(tripType, origin, destination, findType, time)
 //load timetable from JSON sourcefile and build time objects based on triptype and location
 loadTimetable()
 {
+ return new Promise((resolve, reject) =>
+{
+  var err: Object;
   this.http.get("../../assets/timetable.json")
       .map((res:Response) => res.json().timetable).subscribe((timetableData) =>
       {
@@ -189,7 +192,6 @@ loadTimetable()
           this.timetable[key0] = [];
           for (const key1 of Object.keys(timetableData[key0]))
           {
-
             let tmp = [];
             let morningIndex = 0; //keep track of location of first non-early morning time in array
 
@@ -209,18 +211,19 @@ loadTimetable()
               {
                 tmp.push(moment(newTime,'HH:mm'));
               }
-
             });
-
             this.timetable[key0][key1] = tmp;
           }
         }
-        this.dataReady = true;
-
+        console.log("Timetable loaded");
+        //everything's okay, timetable loaded
+        resolve();
+      },
+      (error)=> {
+        reject(Error(error));
       });
 
-    }
 
-
-
+    });
+  }
 }

@@ -10,7 +10,6 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, private timetable: TimetableProvider, public navParams: NavParams) {
     console.log("enter HomePage")
-    console.log(navParams.data);
   }
 
 }

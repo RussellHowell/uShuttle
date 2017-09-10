@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AboutPage } from '../about/about';
-import { ContactPage } from '../contact/contact';
+
 import { HomePage } from '../home/home';
 import { LocationListPage } from '../location-list/location-list';
 
@@ -20,7 +19,6 @@ offCampusNav = {
 
   tab1Root = HomePage;
   tab2Root = LocationListPage;
-  tab3Root = AboutPage;
 
   constructor() {
 
