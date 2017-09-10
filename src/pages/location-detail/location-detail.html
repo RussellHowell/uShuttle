@@ -49,16 +49,19 @@
 <ion-card  *ngFor="let result of resultTimes let i = index" [attr.data-index]="i">
 
   <ion-card-header>
-  <ion-icon name="bus"></ion-icon> &nbsp;  <b>Option {{i+1}}</b>
+  <ion-icon name="bus"></ion-icon>  &nbsp;  <b>Option {{i+1}}</b>
+   <div class="float-right"> <p class="float-right"><ion-icon name="time"></ion-icon> &nbsp;<b>Travel Time:</b> {{formatDuration(result.duration)}}</p></div>
   </ion-card-header>
 
   <ion-card-content>
     <ion-grid>
-      <ion-row>
-        <div col-2>    <img src="assets/img/trip_hint.jpeg"/> </div>
-        <div col-10><p class="top"> {{from}} <b>{{ formatTime(result.departure)}}</b></p>
-        <p> {{to}} <b>{{ formatTime(result.arrival) }}</b></p></div>
+      <ion-row class="relative">
+        <div> <img src="assets/img/trip_hint.jpeg"/>  </div>
+        <div>&nbsp;</div>
+        <div><p class="top"> {{from}} <b>{{ formatTime(result.departure)}}</b></p>
+        <p class="bottom"> {{to}} <b>{{ formatTime(result.arrival) }}</b></p></div> <br/>
   </ion-row>
+    <div [innerHtml]="formatTimeTo(result.timeToDeparture)"></div>
     </ion-grid>
       </ion-card-content>
     </ion-card>

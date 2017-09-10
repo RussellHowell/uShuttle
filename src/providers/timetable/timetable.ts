@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http, Response} from '@angular/http';
+import { Http, Response } from '@angular/http';
 import  moment  from 'moment';
 
 
@@ -7,22 +7,25 @@ import 'rxjs/add/operator/map';
 
 
 @Injectable()
-export class TimetableProvider {
+export class TimetableProvider
+{
 
 timetable: any[];
 dataReady: boolean;
 callbacks: any[];
 
-  constructor(private http: Http) {
+  constructor(private http: Http)
+  {
     console.log('Enter TimetableProvider');
     this.timetable = [];
     this.callbacks = [];
     this.dataReady = false;
     this.loadTimetable();
-}
+  }
 
 //return location names for passed tripType back to requesting page
-getLocations(tripType){
+getLocations(tripType)
+{
   return Object.keys(this.timetable[tripType]);
 }
 
@@ -32,7 +35,8 @@ getNextTimes(type, location, time){
   let queryTime = moment(time, 'HH:mm');
   let result = [];
   for(let i = 0; i<times.length; i++){
-    if(times[i].isSameOrAfter(queryTime)){
+    if(times[i].isSameOrAfter(queryTime))
+    {
       console.log(times[i]);
       for(let j = i; j < i+4; j++){
         result.push(times[j]);
@@ -95,6 +99,9 @@ findTrips(tripType, origin, destination, findType, time)
                   //update arrival array index
                   arrIndx = arr;
 
+                  //insert extra trip data
+                  resultObj["duration"] = moment.duration(resultObj["arrival"].diff(resultObj["departure"]));
+                  resultObj["timeToDeparture"] = moment.duration(moment().diff(resultObj["departure"]));
                   //push resultObj into results array
                   result.push(resultObj);
 
@@ -143,6 +150,10 @@ findTrips(tripType, origin, destination, findType, time)
               //update departure array index
               depIndx = dep;
 
+              //insert extra trip data
+              resultObj["duration"] = moment.duration(resultObj["arrival"].diff(resultObj["departure"]));
+              resultObj["timeToDeparture"] = moment.duration(moment().diff(resultObj["departure"]));
+
               //push resultObj into results array
               result.push(resultObj);
 
@@ -167,19 +178,23 @@ findTrips(tripType, origin, destination, findType, time)
 
 
 //load timetable from JSON sourcefile and build time objects based on triptype and location
-loadTimetable(){
+loadTimetable()
+{
   this.http.get("../../assets/timetable.json")
-      .map((res:Response) => res.json().timetable).subscribe((timetableData) => {
-
+      .map((res:Response) => res.json().timetable).subscribe((timetableData) =>
+      {
         //load JSON timetable into momentJS time objects
-        for (const key0 of Object.keys(timetableData)){
+        for (const key0 of Object.keys(timetableData))
+        {
           this.timetable[key0] = [];
-          for (const key1 of Object.keys(timetableData[key0])) {
+          for (const key1 of Object.keys(timetableData[key0]))
+          {
 
             let tmp = [];
             let morningIndex = 0; //keep track of location of first non-early morning time in array
 
-            timetableData[key0][key1].forEach((time) => {
+            timetableData[key0][key1].forEach((time) =>
+            {
               let newTime = moment(time, 'HH:mm');
 
               if (newTime < moment('01:30', 'HH:mm')){
@@ -190,7 +205,8 @@ loadTimetable(){
                 morningIndex++;
                 tmp.push(moment(newTime,'HH:mm').add(1,'days'));
               }
-              else{
+              else
+              {
                 tmp.push(moment(newTime,'HH:mm'));
               }
 

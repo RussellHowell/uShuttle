@@ -50,6 +50,28 @@ export class LocationDetailPage {
     return time.format('h:mm a');
   }
 
+  formatDuration(duration){
+    return duration.humanize();
+  }
+
+  formatTimeTo(timeTo){
+    if(timeTo > moment.duration(0, 'ms'))
+    {
+      timeTo = moment.duration(24, 'hours').subtract(timeTo);
+    }
+
+    //format/color red for close departure times
+    if(moment.duration(10, 'm').asMilliseconds() > Math.abs(timeTo.asMilliseconds()))
+    {
+      return "<ion-icon class='float-right' name='alert'></ion-icon><p class='red float-right'> Leaving in " + timeTo.humanize() + "</p>";
+    }
+    else
+    {
+        return "<p class='float-right'>Leaving in " + timeTo.humanize() + "</p>";
+    }
+
+  }
+
 
 
 
