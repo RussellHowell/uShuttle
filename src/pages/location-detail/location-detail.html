@@ -7,12 +7,21 @@
 
 </ion-header>
 
+
+
 <ion-content padding>
 
-<div class="image-box">
-  <ion-img class="origin-image" [src]="imgString(from)"></ion-img>
-  <ion-img class="destination-image" [src]="imgString(to)"></ion-img>
-</div>
+  <ion-card class="overlay">
+    <img [src]="imgString(tripType)"/>
+    <ion-card-header class="card-title" >
+      On Campus
+    </ion-card-header>
+
+    <ion-card-header class="card-subtitle">
+      Weekdays - 8:30am to 1:30am
+    </ion-card-header>
+  </ion-card>
+
   <ion-item>
     <ion-label>Where are you?</ion-label>
     <ion-select [(ngModel)]="from" interface="action-sheet">
