@@ -10,7 +10,9 @@
 
 
 <ion-content padding>
-
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col col-12 col-md-8 push-md-2>
   <ion-card class="overlay">
     <img [src]="imgString(tripType)"/>
     <ion-card-header class="card-title" >
@@ -75,5 +77,9 @@
       </ion-card-content>
     </ion-card>
   </ion-row>
+</ion-grid>
+
+</ion-col>
+</ion-row>
 </ion-grid>
 </ion-content>
