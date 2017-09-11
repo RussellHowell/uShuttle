@@ -182,7 +182,6 @@ loadTimetable()
 {
  return new Promise((resolve, reject) =>
 {
-  var err: Object;
   this.http.get("../../assets/timetable.json")
       .map((res:Response) => res.json().timetable).subscribe((timetableData) =>
       {

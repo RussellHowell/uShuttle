@@ -14,7 +14,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TimetableProvider } from '../providers/timetable/timetable';
 import { HttpModule }    from '@angular/http';
-import  moment  from 'moment';
 
 
 

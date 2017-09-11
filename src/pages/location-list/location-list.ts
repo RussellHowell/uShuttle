@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TimetableProvider } from '../../providers/timetable/timetable';
 import { LocationDetailPage } from '../location-detail/location-detail';
-import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
