@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TimetableProvider } from '../../providers/timetable/timetable'
 import  moment  from 'moment';
@@ -69,8 +69,17 @@ export class LocationDetailPage {
     {
         return "<p class='float-right'>Leaving in " + timeTo.humanize() + "</p>";
     }
+  }
+  clearResults()
+  {
+    console.log(this.resultTimes);
+    //clear resultTimes object as to prevent user confusion when a new location is selected
+    this.resultTimes = null;
 
   }
+
+
+
 
 
 

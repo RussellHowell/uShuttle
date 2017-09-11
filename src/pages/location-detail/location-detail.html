@@ -26,14 +26,14 @@
 
   <ion-item>
     <ion-label>Where are you?</ion-label>
-    <ion-select [(ngModel)]="from" interface="action-sheet">
+    <ion-select [(ngModel)]="from" interface="action-sheet" (click)="clearResults()">
       <ion-option *ngFor="let location of locationList" [value]="location">{{location}}</ion-option>
     </ion-select>
   </ion-item>
 
   <ion-item>
     <ion-label>Where are you going?</ion-label> <!-- TODO - Filter out item selectred above -->
-    <ion-select [(ngModel)]="to" interface="action-sheet">
+    <ion-select [(ngModel)]="to" interface="action-sheet" (click)="clearResults()">
       <ion-option *ngFor="let location of locationList" [value]="location">{{location}}</ion-option>
     </ion-select>
   </ion-item>

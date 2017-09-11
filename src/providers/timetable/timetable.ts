@@ -70,8 +70,9 @@ findTrips(tripType, origin, destination, findType, time)
     //keep track of pointers in departure & arrival schedule arrays - start at first elements
     let depIndx = 0;
     let arrIndx = 0;
-      for(let resultIndx = 0; resultIndx < 4; resultIndx++)
+      for(let resultIndx = 0; resultIndx < 5; resultIndx++)
       {
+
         let resultObj = {};
         //iterate through departure array starting at departure array index
         for(let dep = depIndx; dep < departureTimes.length; dep++)
@@ -102,8 +103,49 @@ findTrips(tripType, origin, destination, findType, time)
                   //insert extra trip data
                   resultObj["duration"] = moment.duration(resultObj["arrival"].diff(resultObj["departure"]));
                   resultObj["timeToDeparture"] = moment.duration(moment().diff(resultObj["departure"]));
-                  //push resultObj into results array
-                  result.push(resultObj);
+
+                  //filter out departures that preceed a departure from the same location
+                  //before reaching destination (two stops at same point before destination)
+                  if(resultIndx>0)
+                  {
+                    if(result[resultIndx-1]["arrival"].isSame(resultObj["arrival"]))
+                    {
+                      if(result[resultIndx-1]["duration"] > resultObj["duration"])
+                      {
+
+                        //replace previous - better trip found
+                        resultIndx--;
+                        result[resultIndx] = resultObj;
+                        //break if infinite loop
+                        if(depIndx == departureTimes.length-1 || arrIndx == arrivalTimes.length-1 )
+                        {
+                          resultIndx = 5;
+                        }
+                      }
+                      else
+                      {
+                          //skip - prevent infinite loop
+                          if(depIndx == departureTimes.length-1 || arrIndx == arrivalTimes.length-1 )
+                          {
+                            resultIndx = 5;
+                          }
+                          else
+                          {
+                          resultIndx--;
+                          }
+                      }
+                    }
+                    else
+                    {
+                      //best trip found for specified time, push and proceed
+                      result.push(resultObj);
+                    }
+                  }
+                  else
+                  {
+                    //always keep track of first result - may be overriden if better results are found
+                    result.push(resultObj);
+                  }
 
                   //both times have been found, break out inner for loops
                   //while perserving array indices
