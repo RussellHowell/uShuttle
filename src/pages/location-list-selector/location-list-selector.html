@@ -11,9 +11,9 @@
 <ion-content class="card-background-page" padding>
   <ion-grid fixed>
     <ion-row>
-      <ion-col  col-12 col-md-6>
+      <ion-col  col-12 col-md-6 push-md-3>
       <ion-card *ngFor="let tripType of tripTypes" class="overlay"  [navPush]="locationListPage" [navParams]="{campus: tripLocation, tripType: tripType.tripType}">
-      <img [src]="imgString(tripType.tripType)"/>
+      <img [src]="imgString(tripType.tripType)"/>, ViewChild
       <ion-card-header class="card-title" >
       {{ tripType.tripType }}
       </ion-card-header>
