@@ -13,7 +13,7 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col *ngFor="let location of locations" col-12 col-md-6>
-      <ion-card class="overlay"  [navPush]="detailPage"[navParams]="{loc: location, trip: tripType}">
+      <ion-card class="overlay"  [navPush]="detailPage"[navParams]="{campus: campus, loc: location, trip: tripType}">
       <img [src]="imgString(location)"/>
       <ion-card-header class="card-title" >
         {{ location }}

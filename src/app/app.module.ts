@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LocationListPage } from '../pages/location-list/location-list';
+import { LocationListSelectorPage } from '../pages/location-list-selector/location-list-selector';
 import { LocationDetailPage } from '../pages/location-detail/location-detail';
 import { ErrorPage } from '../pages/error/error';
 
@@ -23,6 +24,7 @@ import { HttpModule }    from '@angular/http';
     HomePage,
     TabsPage,
     LocationListPage,
+    LocationListSelectorPage,
     LocationDetailPage,
     ErrorPage
   ],
@@ -37,6 +39,7 @@ import { HttpModule }    from '@angular/http';
     HomePage,
     TabsPage,
     LocationListPage,
+    LocationListSelectorPage,
     LocationDetailPage,
     ErrorPage
   ],

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 
 import { HomePage } from '../home/home';
-import { LocationListPage } from '../location-list/location-list';
+import { LocationListSelectorPage } from '../location-list-selector/location-list-selector';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -10,15 +10,16 @@ import { LocationListPage } from '../location-list/location-list';
 export class TabsPage {
 
 onCampusNav = {
-  tripType: "On Campus"
+  tripLocation: "On Campus"
 }
 
 offCampusNav = {
-  tripType: "off_campus_weekday"
+  tripLocation: "Off Campus"
 }
 
   tab1Root = HomePage;
-  tab2Root = LocationListPage;
+  tripTypeSelectorRoot = LocationListSelectorPage;
+
 
   constructor() {
 

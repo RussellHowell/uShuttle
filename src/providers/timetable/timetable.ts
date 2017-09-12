@@ -20,9 +20,19 @@ dataReady: boolean;
   }
 
 //return location names for passed tripType back to requesting page
-getLocations(tripType)
+getLocations(campus, tripType)
 {
-  return Object.keys(this.timetable[tripType]);
+  return Object.keys(this.timetable[campus][tripType]["times"]);
+}
+
+getTripTypes(tripLocation)
+{
+  return this.timetable[tripLocation];
+}
+
+getTripTypeInfo(campus, tripType)
+{
+  return this.timetable[campus][tripType]["info"];
 }
 
 //retrieve the next 4 times for location from the timetable data
@@ -43,8 +53,8 @@ getNextTimes(type, location, time){
   return result;
 }
 
-getNextTime(type, location){
-  let times = this.timetable[type][location];
+getNextTime(campus, type, location){
+  let times = this.timetable[campus][type]["times"][location];
   let now = moment();
   for(let i = 0; i<times.length; i++){
     if(times[i].isSameOrAfter(now)){
@@ -53,11 +63,10 @@ getNextTime(type, location){
   }
 }
 
-
-findTrips(tripType, origin, destination, findType, time)
+findTrips(campus, tripType, origin, destination, findType, time)
 {
-  let departureTimes = this.timetable[tripType][origin];
-  let arrivalTimes = this.timetable[tripType][destination];
+  let departureTimes = this.timetable[campus][tripType]["times"][origin];
+  let arrivalTimes = this.timetable[campus][tripType]["times"][destination];
   let result = []
 
   //if the trip modifier is "leaveAt"

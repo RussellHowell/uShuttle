@@ -1,0 +1,59 @@
+page-location-list-selector {
+
+  h2{
+    text-align: center;
+  }
+
+  .card-background-page {
+
+    ion-card {
+      position: relative;
+      text-align: center;
+      height: 225px;
+      padding: 0px;
+      background-size: cover;
+      object-fit: cover;
+
+      img{
+        height: 100%;
+        object-fit: cover;
+      }
+
+
+
+      &:before {
+          content: '';
+              position: absolute;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+              background-image: linear-gradient(to bottom right,#000,#000);
+              opacity: .30;
+        }
+    }
+
+
+
+    .card-title {
+      position: absolute;
+      top: 36%;
+      font-size: 2.0em;
+      width: 100%;
+      font-weight: bolder;
+      color: #fff;
+      color: white;
+    }
+
+    .card-subtitle {
+      font-size: 1.25em;
+      position: absolute;
+      top: 52%;
+      width: 100%;
+      color: #fff;
+
+    }
+
+  }
+
+}

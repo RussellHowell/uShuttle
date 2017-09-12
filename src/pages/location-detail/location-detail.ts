@@ -10,6 +10,8 @@ import  moment  from 'moment';
 })
 export class LocationDetailPage {
 
+  campus: String;
+  tripTypeInfo: String;
   from: String;
   to: String;
   locationList: String[];
@@ -23,7 +25,9 @@ export class LocationDetailPage {
 
   constructor(public navCtrl: NavController, private timetable: TimetableProvider, public navParams: NavParams) {
    this.tripType = navParams.data.trip;
-   this.locationList = timetable.getLocations(this.tripType);
+   this.campus = navParams.data.campus;
+   this.tripTypeInfo = timetable.getTripTypeInfo(this.campus, this.tripType);
+   this.locationList = timetable.getLocations(this.campus, this.tripType);
    this.from = navParams.data.loc;
    this.to = this.locationList[0];
    this.locationMod = "leave";
@@ -32,7 +36,7 @@ export class LocationDetailPage {
 }
 
   findTrips(){
-     this.resultTimes = this.timetable.findTrips(this.tripType, this.from, this.to, this.locationMod, this.time);
+     this.resultTimes = this.timetable.findTrips(this.campus, this.tripType, this.from, this.to, this.locationMod, this.time);
    }
 
   ionViewDidLoad() {

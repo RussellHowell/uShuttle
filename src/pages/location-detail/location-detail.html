@@ -2,7 +2,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ tripType }}</ion-title>
+    <ion-title>{{ campus }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,11 +16,11 @@
   <ion-card class="overlay">
     <img [src]="imgString(tripType)"/>
     <ion-card-header class="card-title" >
-      On Campus
+      {{ tripType }}
     </ion-card-header>
 
     <ion-card-header class="card-subtitle">
-      Weekdays - 8:30am to 1:30am
+      {{ tripTypeInfo }}
     </ion-card-header>
   </ion-card>
 
