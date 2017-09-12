@@ -3,5 +3,8 @@
   "description": "",
   "repository": "https://github.com/russellhowell/ushuttle",
   "logo": "",
+  "dependencies": {
+    "express": "~4.4.3"
+  },
   "keywords": ["ionic"]
 }
