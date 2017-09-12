@@ -13,7 +13,7 @@
     <ion-row>
       <ion-col  col-12 col-md-6>
       <ion-card *ngFor="let tripType of tripTypes" class="overlay"  [navPush]="locationListPage" [navParams]="{campus: tripLocation, tripType: tripType.tripType}">
-      <!-- <img [src]="imgString(tripType)"/> -->
+      <img [src]="imgString(tripType.tripType)"/>
       <ion-card-header class="card-title" >
       {{ tripType.tripType }}
       </ion-card-header>

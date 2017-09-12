@@ -35,4 +35,8 @@ export class LocationListSelectorPage {
     };
   }
 
+  imgString(loc){
+    return "assets/img/" + loc + ".jpg";
+  }
+
 }
