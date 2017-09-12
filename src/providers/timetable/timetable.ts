@@ -61,6 +61,8 @@ getNextTime(campus, type, location){
       return times[i];
     }
   }
+  //the last shuttle has departed :(
+  return times[0];
 }
 
 findTrips(campus, tripType, origin, destination, findType, time)
