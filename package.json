@@ -48,7 +48,9 @@
     "moment": "^2.18.1",
     "rxjs": "5.4.0",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.12"
+    "zone.js": "0.8.12",
+    "typescript": "2.3.4"
+
   },
   "devDependencies": {
     "@ionic/app-scripts": "2.1.4",
