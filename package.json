@@ -5,7 +5,7 @@
   "homepage": "http://ionicframework.com/",
   "private": true,
   "engines": {
-    "node": "8.0.0"
+    "node": "7.0.0"
   },
   "scripts": {
     "clean": "ionic-app-scripts clean",
