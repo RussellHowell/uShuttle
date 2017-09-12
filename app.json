@@ -1,0 +1,7 @@
+{
+      "name": "uShuttle",
+      "description": "Timetable application for the Villanova University shuttle",
+      "repository": "https://github.com/russellhowell/ushuttle",
+      "logo": "",
+      "keywords": ["ionic2", "heroku"]
+  }
