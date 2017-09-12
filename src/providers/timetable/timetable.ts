@@ -12,15 +12,11 @@ export class TimetableProvider
 
 timetable: any[];
 dataReady: boolean;
-callbacks: any[];
 
   constructor(private http: Http)
   {
     console.log('Enter TimetableProvider');
     this.timetable = [];
-    this.callbacks = [];
-    this.dataReady = false;
-    //this.loadTimetable();
   }
 
 //return location names for passed tripType back to requesting page
@@ -228,43 +224,52 @@ loadTimetable()
       .map((res:Response) => res.json().timetable).subscribe((timetableData) =>
       {
         //load JSON timetable into momentJS time objects
-        for (const key0 of Object.keys(timetableData))
+        for (const campus of Object.keys(timetableData))
         {
-          this.timetable[key0] = [];
-          for (const key1 of Object.keys(timetableData[key0]))
+          this.timetable[campus] = [];
+          for (const tripType of Object.keys(timetableData[campus]))
           {
-            let tmp = [];
-            let morningIndex = 0; //keep track of location of first non-early morning time in array
+              this.timetable[campus][tripType] = {};
+            //enter times & and info for each campus -> triptype
+              this.timetable[campus][tripType]["info"] =  timetableData[campus][tripType]["info"];
+              this.timetable[campus][tripType]["times"] = {};
 
-            timetableData[key0][key1].forEach((time) =>
-            {
-              let newTime = moment(time, 'HH:mm');
-
-              if (newTime < moment('01:30', 'HH:mm')){
-                //if the time is before 01:30 add it to the beginning of the time array
-                //and at the end of the array but with one day added, increment index
-                //in order to keep track of begining of array
-                tmp.splice(morningIndex, 0, moment(newTime, 'HH:mm'));
-                morningIndex++;
-                tmp.push(moment(newTime,'HH:mm').add(1,'days'));
-              }
-              else
+              for(const location of Object.keys (timetableData[campus][tripType]["times"]))
               {
-                tmp.push(moment(newTime,'HH:mm'));
+                let tmp = [];
+                let morningIndex = 0; //keep track of location of first non-early morning time in array
+
+                timetableData[campus][tripType]["times"][location].forEach((time) =>
+                {
+                  let newTime = moment(time, 'HH:mm');
+
+                  if (newTime < moment('01:30', 'HH:mm'))
+                  {
+                    //if the time is before 01:30 add it to the beginning of the time array
+                    //and at the end of the array but with one day added, increment index
+                    //in order to keep track of begining of array
+                    tmp.splice(morningIndex, 0, moment(newTime, 'HH:mm'));
+                    morningIndex++;
+                    tmp.push(moment(newTime,'HH:mm').add(1,'days'));
+                  }
+                  else
+                  {
+                    tmp.push(moment(newTime,'HH:mm'));
+                  }
+                });
+                this.timetable[campus][tripType]["times"][location] = tmp;
               }
-            });
-            this.timetable[key0][key1] = tmp;
           }
         }
         console.log("Timetable loaded");
         //everything's okay, timetable loaded
+        console.log(this.timetable);
         resolve();
       },
-      (error)=> {
+      (error)=>
+      {
         reject(Error(error));
       });
-
-
     });
   }
 }
