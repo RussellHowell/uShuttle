@@ -71,6 +71,13 @@ findTrips(campus, tripType, origin, destination, findType, time)
   let arrivalTimes = this.timetable[campus][tripType]["times"][destination];
   let result = []
 
+  //TODO - UPDATE - QUICK FIX FOR SAME LOCATION REQUEST
+  if(origin == destination)
+  {
+    console.log("origin is same as destination");
+    return result;
+  }
+
   //if the trip modifier is "leaveAt"
   if(findType === "leave")
   {
@@ -113,13 +120,8 @@ findTrips(campus, tripType, origin, destination, findType, time)
 
                   //filter out departures that preceed a departure from the same location
                   //before reaching destination (two stops at same point before destination)
-                  if(resultIndx>0)
+                  if(resultIndx>0 && result[resultIndx-1]["arrival"].isSame(resultObj["arrival"]))
                   {
-                    if(result[resultIndx-1]["arrival"].isSame(resultObj["arrival"]))
-                    {
-                      if(result[resultIndx-1]["duration"] > resultObj["duration"])
-                      {
-
                         //replace previous - better trip found
                         resultIndx--;
                         result[resultIndx] = resultObj;
@@ -128,25 +130,6 @@ findTrips(campus, tripType, origin, destination, findType, time)
                         {
                           resultIndx = 5;
                         }
-                      }
-                      else
-                      {
-                          //skip - prevent infinite loop
-                          if(depIndx == departureTimes.length-1 || arrIndx == arrivalTimes.length-1 )
-                          {
-                            resultIndx = 5;
-                          }
-                          else
-                          {
-                          resultIndx--;
-                          }
-                      }
-                    }
-                    else
-                    {
-                      //best trip found for specified time, push and proceed
-                      result.push(resultObj);
-                    }
                   }
                   else
                   {
