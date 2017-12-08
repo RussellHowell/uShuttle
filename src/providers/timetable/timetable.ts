@@ -231,7 +231,8 @@ loadTimetable()
 {
  return new Promise((resolve, reject) =>
 {
-  this.http.get("../../assets/timetable.json")
+  //retrieve timetable json from server
+  this.http.get("../../../api/timetable")
       .map((res:Response) => res.json().timetable).subscribe((timetableData) =>
       {
         //load JSON timetable into momentJS time objects

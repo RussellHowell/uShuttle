@@ -1,6 +1,8 @@
 var express = require('express'),
     app = express();
 
+var timetable = require('./timetable.json');
+
 app.use(express.static('www'));
 
 // CORS (Cross-Origin Resource Sharing) headers to support Cross-site HTTP requests
@@ -13,7 +15,11 @@ app.all('*', function(req, res, next) {
 // API Routes
 // app.get('/blah', routeHandler);
 
-app.set('port', process.env.PORT || 5000);
+app.get('/api/timetable', (req, res)=>{
+  res.json(timetable);
+});
+
+app.set('port', process.env.PORT || 3000);
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
